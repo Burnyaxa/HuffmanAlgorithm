@@ -8,6 +8,6 @@ void main(){
 	vector <letter> frequencyTable = getLetters(text);
 	printTable(frequencyTable);
 	vector <element*> elements = getElements(frequencyTable);
-	//t.top = haffman_algorithm(elements);
+	t.top = haffman_algorithm(elements);
 	system("pause");
 }
