@@ -58,3 +58,20 @@ void infix(element *top)
 		cout << top->data << " ";
 	infix(top->right);
 }
+
+int height(tree b) {
+	element *p = b.top;
+	if (p == NULL) {
+		return -1;
+	}
+
+	int lefth = height(p->left);
+	int righth = height(p->right);
+
+	if (lefth > righth) {
+		return lefth + 1;
+	}
+	else {
+		return righth + 1;
+	}
+}
