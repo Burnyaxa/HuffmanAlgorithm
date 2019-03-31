@@ -46,8 +46,17 @@ char tree::find(const string &code){
 }
 
 element *haffman_algorithm(vector< element* > &el){
-	while (el.size() > 1)
-		el.insert(el.begin(), add(min(el), min(el)));
+	while (el.size() > 1) {
+		element *root = new element;
+		root->amount = 0;
+		root->left = el.back();
+		root->amount += el.back()->amount;
+		el.pop_back();
+		root->right = el.back();
+		root->amount += el.back()->amount;
+		el.pop_back();
+		el.push_back(root);
+	}
 	return el[0];
 }
 
@@ -78,11 +87,9 @@ int height(tree b) {
 }
 
 vector <element*> getElements(vector<letter> table){
-	vector <element*> elements;
+	vector <element*> elements(table.size());
 	for (int i = 0; i < table.size(); i++){
-		if (table[i].frequency != 0){
-			elements.push_back(new element(table[i].symbol, table[i].frequency));
-		}
+		elements[i]= new element(table[i].symbol, table[i].frequency);
 	}
 	return elements;
 }
