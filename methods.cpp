@@ -1,4 +1,5 @@
 #include "tree.h"
+#include "fileMethods.h"
 
 bool compare(element *first, element *second){
 	return first->amount < second->amount;
@@ -74,4 +75,14 @@ int height(tree b) {
 	else {
 		return righth + 1;
 	}
+}
+
+vector <element*> getElements(vector<letter> table){
+	vector <element*> elements;
+	for (int i = 0; i < table.size(); i++){
+		if (table[i].frequency != 0){
+			elements.push_back(new element(table[i].symbol, table[i].frequency));
+		}
+	}
+	return elements;
 }

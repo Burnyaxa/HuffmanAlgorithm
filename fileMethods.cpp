@@ -1,4 +1,5 @@
 #include "fileMethods.h"
+#include "tree.h"
 
 vector <string> getText(){
 	vector <string> text;
