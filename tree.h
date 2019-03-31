@@ -17,9 +17,11 @@ struct tree
 	
 	char find(const string &code);
 
-
 };
 
 bool compare(element *first, element *second);
 element *min(vector <element*> el);
-element *add(element *l, element *r);element *haffman_algorithm(vector< element* > &el);void infix(element *top);
+element *add(element *l, element *r);
+element *haffman_algorithm(vector< element* > &el);
+void infix(element *top);
+int height(tree b);
