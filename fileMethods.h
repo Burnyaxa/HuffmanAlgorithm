@@ -15,6 +15,6 @@ struct letter {
 };
 
 vector <letter> getLetters(vector <string> text);
-vector <string> getText();
+vector <string> getText(string path);
 void print(vector <string> text);
 void printTable(vector<letter> table);

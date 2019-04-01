@@ -163,3 +163,22 @@ void codding_text(vector<node_with_code*> code_string, vector <string> text) {
 	}
 	file.close();
 }
+
+void from_code_to_text(string path,tree b) {
+	string temp;
+	char ch;
+	vector<string> text = getText(path);
+	ofstream output("Result.txt");
+	for(unsigned i =0;i<text.size();i++){
+		for (unsigned j = 0; j < text[i].size(); j++) {
+			ch = text[i][j];
+			if (ch == ' ') {
+				output << b.find(temp);
+				temp.clear();
+			}
+			else temp += text[i][j];
+		}
+		output << '\n';
+	}
+	output.close();
+}

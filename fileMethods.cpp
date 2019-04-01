@@ -1,10 +1,10 @@
 #include "fileMethods.h"
 #include "tree.h"
 
-vector <string> getText(){
+vector <string> getText(string path){
 	vector <string> text;
 	string row;
-	ifstream input("text.txt");
+	ifstream input(path);
 	while (input.good()){
 		getline(input, row);
 		text.push_back(row);
