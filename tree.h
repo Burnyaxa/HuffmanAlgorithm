@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,8 +8,9 @@ struct element
 {
 	char data;
 	int amount;
+	string code;
 	element *left, *right;
-	element(char value = '\0', int am = 0) : left(NULL),right(NULL), data(value), amount(am) {}
+	element(char value = '\0', int am = 0) : left(NULL),right(NULL), data(value), amount(am),code() {}
 };
 
 struct tree
@@ -30,3 +32,5 @@ element *haffman_algorithm(vector< element* > &el);
 void infix(element *top);
 int height(tree b);
 vector <element*> getElements(vector<letter> table);
+void prefix(element *top);
+void calculate_huffman_codes(element *root);

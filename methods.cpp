@@ -1,6 +1,19 @@
 #include "tree.h"
 #include "fileMethods.h"
 
+void sort_table(vector<element*> &elements) {
+	for (int i = 0; i < elements.size(); i++) {
+		for (int j = i; j < elements.size(); j++) {
+			if (elements[j]->amount > elements[i]->amount) {
+				element *temp = new element;
+				temp = elements[j];
+				elements[j] = elements[i];
+				elements[i] = temp;
+			}
+		}
+	}
+}
+
 bool compare(element *first, element *second){
 	return first->amount < second->amount;
 }
@@ -49,13 +62,14 @@ element *haffman_algorithm(vector< element* > &el){
 	while (el.size() > 1) {
 		element *root = new element;
 		root->amount = 0;
-		root->left = el.back();
-		root->amount += el.back()->amount;
-		el.pop_back();
 		root->right = el.back();
 		root->amount += el.back()->amount;
 		el.pop_back();
+		root->left = el.back();
+		root->amount += el.back()->amount;
+		el.pop_back();
 		el.push_back(root);
+		sort_table(el);
 	}
 	return el[0];
 }
@@ -65,7 +79,14 @@ void infix(element *top)
 	if (!top) return;
 	infix(top->left);
 	if (!(top->left && top->right))
-		cout << top->data << " ";
+		cout << top->data <<" "<<top->code << endl;
+	infix(top->right);
+}
+void prefix(element *top)
+{
+	if (!top) return;
+	cout << top->data << " ";
+	infix(top->left);
 	infix(top->right);
 }
 
@@ -92,4 +113,23 @@ vector <element*> getElements(vector<letter> table){
 		elements[i]= new element(table[i].symbol, table[i].frequency);
 	}
 	return elements;
+}
+
+
+void traverse(element *node, string code)
+{
+	if (node->left == NULL && node->right == NULL)
+	{
+		node->code = code;
+	}
+	else
+	{
+		traverse(node->left, code + '0');
+		traverse(node->right, code + '1');
+	}
+}
+
+void calculate_huffman_codes(element *root)
+{
+	traverse(root, "");
 }
