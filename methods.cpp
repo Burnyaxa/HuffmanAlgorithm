@@ -46,13 +46,17 @@ element *add(element *l, element *r){
 	return new_top;
 }
 
-char tree::find(const string &code){
+char tree::find(const string &code, int &counter){
 	element *p = this->top;
 	for (int i = 0; p, i < code.length(); i++)
-		if (code[i] == '0')
+		if (code[i] == '0'){
+			counter++;
 			p = p->left;
-		else if (code[i] == '1')
+		}
+		else if (code[i] == '1'){
+			counter++;
 			p = p->right;
+		}
 		else exit(1);
 		if (!p || p->left || p->right) return '\0';
 		return p->data;
@@ -165,6 +169,7 @@ void codding_text(vector<node_with_code*> code_string, vector <string> text) {
 }
 
 void from_code_to_text(string path,tree b) {
+	int counter = 0;
 	string temp;
 	char ch;
 	vector<string> text = getText(path);
@@ -173,7 +178,7 @@ void from_code_to_text(string path,tree b) {
 		for (unsigned j = 0; j < text[i].size(); j++) {
 			ch = text[i][j];
 			if (ch == ' ') {
-				output << b.find(temp);
+				output << b.find(temp, counter);
 				temp.clear();
 			}
 			else temp += text[i][j];
@@ -181,4 +186,15 @@ void from_code_to_text(string path,tree b) {
 		output << '\n';
 	}
 	output.close();
+}
+
+int tree::getAverageLength(vector<node_with_code*> table){
+	int counter = 0;
+	int sum = 0;
+	for (int i = 0; i < table.size(); i++){
+		find(table[i]->code, counter);
+		sum += counter;
+		counter = 0;
+	}
+	return sum / table.size();
 }

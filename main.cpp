@@ -16,7 +16,7 @@ void main(){
 	create_table_with_code(t.top, code_string);
 	codding_text(code_string, text);
 	from_code_to_text("codding_text.txt", t);
-	cout << "Height= " << height(t) << endl;
-	
+	cout << "Height = " << height(t) << endl;
+	cout << "Average path length = " << t.getAverageLength(code_string) << endl;
 	system("pause");
 }

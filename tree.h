@@ -27,8 +27,8 @@ struct tree
 	element *top;
 	tree(element* t = 0) : top(t){}
 	
-	char find(const string &code);
-
+	char find(const string &code, int &counter);
+	int getAverageLength(vector<node_with_code*> table);
 
 };
 
