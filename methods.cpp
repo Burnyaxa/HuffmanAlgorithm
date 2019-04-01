@@ -216,7 +216,7 @@ void prt(element *n)
 
 	int depth = max_depth(n);
 
-	char buf[1024];
+	char buf[102400];
 	int last_lvl = 0;
 	int offset = (1 << depth) - 1;
 
@@ -239,9 +239,9 @@ void prt(element *n)
 
 		// output <offset><data><offset>
 		if (nd.n)
-			sprintf(buf, " %*s%d%*s", offset, " ", nd.n->data, offset, " ");
+			sprintf(buf, " %*s %d %*s ", offset, " ", nd.n->data, offset, " ");
 		else
-			sprintf(buf, " %*s", offset << 1, " ");
+			sprintf(buf, "%*s", offset << 1, " ");
 		std::cout << buf;
 
 		if (nd.n)
