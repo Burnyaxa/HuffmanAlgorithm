@@ -17,6 +17,7 @@ void sort_table(vector<element*> &elements) {
 bool compare(element *first, element *second){
 	return first->amount < second->amount;
 }
+
 element *min(vector <element*> el){
 	element *min = el[0];
 	unsigned int erase_position = 0;
@@ -86,6 +87,7 @@ void infix(element *top)
 		cout << top->data <<" "<<top->code << endl;
 	infix(top->right);
 }
+
 void prefix(element *top)
 {
 	if (!top) return;
@@ -119,7 +121,6 @@ vector <element*> getElements(vector<letter> table){
 	return elements;
 }
 
-
 void traverse(element *node, string code)
 {
 	if (node->left == NULL && node->right == NULL)
@@ -137,6 +138,7 @@ void calculate_huffman_codes(element *root)
 {
 	traverse(root, "");
 }
+
 void create_table_with_code(element *top,vector<node_with_code*> &code_string) {
 	if (!top) return;
 	create_table_with_code(top->left,code_string);
@@ -144,8 +146,6 @@ void create_table_with_code(element *top,vector<node_with_code*> &code_string) {
 		code_string.push_back(new node_with_code(top->data, top->code));
 	create_table_with_code(top->right,code_string);
 }
-
-
 
 void codding_text(vector<node_with_code*> code_string, vector <string> text) {
 	string temp;
@@ -197,4 +197,60 @@ int tree::getAverageLength(vector<node_with_code*> table){
 		counter = 0;
 	}
 	return sum / table.size();
+}
+
+int max_depth(element *n)
+{
+	if (!n) return 0;
+	return 1 + std::max(max_depth(n->left), max_depth(n->right));
+}
+
+void prt(element *n)
+{
+	struct node_depth
+	{
+		element *n;
+		int lvl;
+		node_depth(element *n, int lvl) : n(n), lvl(lvl) {}
+	};
+
+	int depth = max_depth(n);
+
+	char buf[1024];
+	int last_lvl = 0;
+	int offset = (1 << depth) - 1;
+
+	// using a queue means we perform a breadth first iteration through the tree
+	list<node_depth> q;
+
+	q.push_back(node_depth(n, last_lvl));
+	while (q.size())
+	{
+		const node_depth& nd = *q.begin();
+
+		// moving to a new level in the tree, output a new line and calculate new offset
+		if (last_lvl != nd.lvl)
+		{
+			cout << "\n";
+
+			last_lvl = nd.lvl;
+			offset = (1 << (depth - nd.lvl)) - 1;
+		}
+
+		// output <offset><data><offset>
+		if (nd.n)
+			sprintf(buf, " %*s%d%*s", offset, " ", nd.n->data, offset, " ");
+		else
+			sprintf(buf, " %*s", offset << 1, " ");
+		std::cout << buf;
+
+		if (nd.n)
+		{
+			q.push_back(node_depth(nd.n->left, last_lvl + 1));
+			q.push_back(node_depth(nd.n->right, last_lvl + 1));
+		}
+
+		q.pop_front();
+	}
+	std::cout << "\n";
 }
