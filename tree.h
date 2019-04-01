@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <ctype.h>
 using namespace std;
 
 struct element
@@ -11,6 +13,13 @@ struct element
 	string code;
 	element *left, *right;
 	element(char value = '\0', int am = 0) : left(NULL),right(NULL), data(value), amount(am),code() {}
+};
+
+struct node_with_code
+{
+	char data;
+	string code;
+	node_with_code(char value = '\0', string codee = "0") :  data(value), code(codee) {}
 };
 
 struct tree
@@ -34,3 +43,5 @@ int height(tree b);
 vector <element*> getElements(vector<letter> table);
 void prefix(element *top);
 void calculate_huffman_codes(element *root);
+void create_table_with_code(element *top, vector<node_with_code*> &code_string);
+void codding_text(vector<node_with_code*> code_string, vector <string> text);
