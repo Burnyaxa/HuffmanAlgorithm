@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <ctype.h>
+#include <sstream>
 using namespace std;
 
 struct element

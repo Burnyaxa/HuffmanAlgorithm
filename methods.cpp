@@ -141,6 +141,8 @@ void create_table_with_code(element *top,vector<node_with_code*> &code_string) {
 	create_table_with_code(top->right,code_string);
 }
 
+
+
 void codding_text(vector<node_with_code*> code_string, vector <string> text) {
 	string temp;
 	char ch;
@@ -148,20 +150,16 @@ void codding_text(vector<node_with_code*> code_string, vector <string> text) {
 	ofstream file("codding_text.txt", ios::trunc);
 	for (unsigned i = 0; i < text.size(); i++) {
 		temp = text[i];
-		if (temp == "\n") file << "\n";
-		else {
-			for (unsigned j = 0; j < temp.size(); j++) {
-				if (temp[j] == ' ') file << " ";
-				if (temp == "\n") file << "\n";
-				else {
-					ch = tolower(temp[j]);
-					k = 0;
-					while (code_string[k]->data != ch) {
-						k++;
-					}
-					file << code_string[k]->code;
-				}
+		for (unsigned j = 0; j < temp.size(); j++) {
+			ch = temp[j];
+			ch = tolower(temp[j]);
+			k = 0;
+			while (code_string[k]->data != ch) {
+				k++;
 			}
+			file << code_string[k]->code<<" ";
 		}
+		file << '\n';
 	}
+	file.close();
 }
