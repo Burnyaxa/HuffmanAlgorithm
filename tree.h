@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <list>
 #include <stdio.h>
+#include <io.h>
+#include <fcntl.h>
 using namespace std;
 
 struct element
@@ -49,4 +51,4 @@ void calculate_huffman_codes(element *root);
 void create_table_with_code(element *top, vector<node_with_code*> &code_string);
 void codding_text(vector<node_with_code*> code_string, vector <string> text);
 void from_code_to_text(string path, tree b);
-void prt(element *n);
+void printBT(const std::string& prefix, const element* node, bool isLeft);

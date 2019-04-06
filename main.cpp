@@ -12,7 +12,7 @@ void main(){
 	t.top = haffman_algorithm(elements);
 	calculate_huffman_codes(t.top);
 	infix(t.top);
-	prt(t.top);
+	printBT("", t.top, false);
 	/*vector<node_with_code*> code_string;
 	create_table_with_code(t.top, code_string);
 	codding_text(code_string, text);
