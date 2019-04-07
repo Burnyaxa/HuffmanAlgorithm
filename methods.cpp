@@ -199,19 +199,23 @@ int tree::getAverageLength(vector<node_with_code*> table){
 	return sum / table.size();
 }
 
-void printBT(const std::string& prefix, const element* node, bool isLeft)
+void printBT(const std::string& prefix, const element* node, bool isLeft, int &counter)
 {
 	if (node != nullptr)
 	{
+		counter++;
 		std::cout << prefix;
-
-		std::wcout << (isLeft ? "|---" : "|---");
-
+		if (counter == 1){
+			cout << "|---";
+		}
+		else{
+			std::wcout << (isLeft ? "|-0-" : "|-1-");
+		}
 		// print the value of the node
 		std::cout << node->data << std::endl;
 
 		// enter the next tree level - left and right branch
-		printBT(prefix + (isLeft ? "|   " : "    "), node->left, true);
-		printBT(prefix + (isLeft ? "|   " : "    "), node->right, false);
+		printBT(prefix + (isLeft ? "|   " : "    "), node->left, true, counter);
+		printBT(prefix + (isLeft ? "|   " : "    "), node->right, false, counter);
 	}
 }
